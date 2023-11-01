@@ -119,14 +119,17 @@ class AuthService {
       );
       print("abhaya  $tokenRes");
       var response = jsonDecode(tokenRes.body);
+      print("response $response");
       if (response == true) {
         http.Response res = await http.get(
-          Uri.parse('$uri/'),
+          Uri.parse('$uri'),
           headers: <String, String>{
             'Content-Type': 'application/json;charset=UTF-8',
             "x-auth-token": token,
           },
         );
+        print("res ${res.body}");
+
         var userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.setUser(res.body);
       }
